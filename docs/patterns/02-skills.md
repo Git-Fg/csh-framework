@@ -80,7 +80,7 @@ after_command: Check for errors and log
 
 **Key Points**:
 - Skills define error modes and recovery strategies
-- Hooks provide safety nets (before/after commands)
+- Hooks provide automation (before/after commands)
 - Agent doesn't need to handle errors directly - skill manages them
 - Retry logic is embedded in skill instructions
 

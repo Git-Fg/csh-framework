@@ -17,7 +17,7 @@ The CSH Framework provides a architecture for building AI agent extensions that 
 - **Up to 98% token reduction** in production scenarios
 - **Agent autonomy preserved**: Can always bypass skills and use primitives directly
 - **Skills teach patterns**, don't abstract away capabilities
-- **Hooks automate** repetition and enforce safety without blocking agent
+- **Hooks automate** repetition and provide context without blocking agent
 
 ---
 
@@ -81,9 +81,9 @@ This isn't a skill design flaw — it's how current models were trained. They ex
 
 ---
 
-### Layer 3: Hooks (Automation + Enforcement)
+### Layer 3: Hooks (Automation + Context)
 
-**Purpose**: Event-driven automation and lightweight enforcement mechanisms
+**Purpose**: Event-driven automation and context injection
 
 **Design Principles**:
 - Hooks run automatically at specific lifecycle events (`session_start`, `before_command`, etc.)
@@ -92,10 +92,10 @@ This isn't a skill design flaw — it's how current models were trained. They ex
 - Hooks automate without controlling agent decision-making
 
 **What This Provides**:
-- **Context reinforcement**: Critical info (like "running in production") stays top-of-mind
+- **Context reinforcement**: Remind agent about relevant skills at right time
 - **Lifecycle automation**: Session start/end hooks for setup/teardown
-- **Safety guardrails**: Pre-command validation, warning injection
-- **Audit trails**: Automatic logging of operations
+- **Output processing**: Transform or enrich tool results
+- **Usage tracking**: Log operations for analytics
 
 ---
 
@@ -143,7 +143,7 @@ This architecture is based on research from:
 1. **Progressive disclosure** is the core mechanism for token efficiency
 2. **CLI primitives** leverage what agents already know
 3. **Skills encode patterns**, not just commands
-4. **Hooks provide safety nets** without restricting autonomy
+4. **Hooks provide context and automation** without restricting autonomy
 5. **Mode-switching resistance** makes hooks necessary today
 
 ---

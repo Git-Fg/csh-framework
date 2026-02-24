@@ -18,7 +18,7 @@ The CSH Framework (CLI-Skills-Hooks) provides a architecture for building AI age
 |-------|---------|---------|
 | **CLI Primitives** | Single, focused operations | `git`, `curl`, `jq` |
 | **Skills** | High-level workflows | "resilient-web-scrape" |
-| **Hooks** | Automation & guardrails | Session lifecycle |
+| **Hooks** | Automation & context | Session lifecycle |
 
 ---
 
@@ -27,7 +27,6 @@ The CSH Framework (CLI-Skills-Hooks) provides a architecture for building AI age
 ### Core Concepts
 - [Philosophy](./core/01-philosophy.md) — Why CLI + Skills + Hooks
 - [Architecture](./core/02-architecture.md) — Three-layer architecture
-- [Trade-offs](./core/03-tradeoffs.md) — Honest assessment vs alternatives
 
 ### Platform Guides
 - [Claude Code](./platforms/01-claude-code.md) — Integration with Claude Code
@@ -83,7 +82,7 @@ When I need to do X, use this approach:
 
 1. **5-10-5 Pattern**: Aim for 5-10 command families with matching skills
 2. **Progressive Disclosure**: Return minimal summaries by default, verbose on request
-3. **Hooks for Safety**: Use hooks for guardrails that always apply
+3. **Hooks for Context**: Use hooks to remind agent about your skills at right time
 4. **Self-Documenting CLI**: Every command supports `--help`
 
 ---
@@ -103,7 +102,7 @@ Traditional MCP loads all tools into context (50,000+ tokens). The CSH Framework
 
 - **Progressive Disclosure**: Load only what's needed when it's needed
 - **CLI as Contract**: Leverage tools agents already understand
-- **Hooks as Safety Net**: Automate guardrails without restricting freedom
+- **Hooks for Context**: Automate and inject context without restricting freedom
 
 ---
 

@@ -394,7 +394,7 @@ write_file() {
 | 5-10-5 | Command families with 5 subcommands each |
 | Progressive Disclosure | Minimal output by default, full on request |
 | Self-Documenting | Complete `--help` at every level |
-| JSON Output | Structured data for LLM parsing |
+| JSON Output | Structured data for programmatic parsing |
 | Absolute Paths | Eliminate location ambiguity |
 | Exit Codes | Enable error detection and recovery |
 | Verbose Mode | Debugging support for agents |
