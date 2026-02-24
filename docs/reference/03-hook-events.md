@@ -1,142 +1,193 @@
 # Hook Events Reference
 
-Complete reference for available hook events across platforms.
+Events relevant for building plugins with CLI tools.
 
 ---
 
-## OpenClaw Hook Events
+## OpenClaw Events for Plugin Developers
 
-### Lifecycle Hooks
+### Command Events
 
-| Event | Fires When | Common Use |
-|-------|-------------|------------|
-| `session:start` | New session begins | Load context, set variables |
-| `session:end` | Session completes | Save state, cleanup |
-| `session:new` | New command in session | Capture context |
+| Event | Fires When | Use For |
+|-------|------------|---------|
+| `command:new` | `/new` command | Load context from previous sessions |
+| `command:reset` | `/reset` command | Cleanup before reset |
+| `command:stop` | `/stop` command | Graceful shutdown |
 
-### Command Hooks
+### Agent Events
 
-| Event | Fires When | Common Use |
-|-------|-------------|------------|
-| `before:command` | Before tool execution | Context injection |
-| `after:command` | After tool execution | Output processing |
+| Event | Fires When | Use For |
+|-------|------------|---------|
+| `agent:bootstrap` | Before workspace bootstrap | Inject plugin context |
 
-### Automation Triggers
+### Gateway Events
 
-| Trigger | Fires When | Common Use |
-|---------|-------------|------------|
-| `webhook` | HTTP request received | External integrations |
-| `cron` | Scheduled time | Periodic tasks |
-| `heartbeat` | Interval | Health checks |
+| Event | Fires When | Use For |
+|-------|------------|---------|
+| `gateway:startup` | Gateway starts | Plugin initialization |
 
-### Additional OpenClaw Events
+### Plugin API
 
-| Event | Fires When | Common Use |
-|-------|-------------|------------|
-| `gateway:startup` | Gateway starts | Health checks, initialization |
-| `command:new` | `/new` command | Context from previous sessions |
-| `before_compaction` | Memory flush | Checkpoint before compaction |
+| Event | Fires When | Use For |
+|-------|------------|---------|
+| `tool_result_persist` | Before tool result saved | Transform CLI output |
 
 ---
 
-## Claude Code Hook Events
-
-### Session Events
+## Claude Code Events
 
 | Event | Fires When |
 |-------|------------|
 | `SessionStart` | Session begins |
 | `SessionEnd` | Session ends |
-| `Stop` | Session stopped |
-
-### Task Events
-
-| Event | Fires When |
-|-------|------------|
-| `TaskCompleted` | Task finishes |
-| `TaskFailed` | Task fails |
-
-### Tool Events
-
-| Event | Fires When |
-|-------|------------|
 | `PreToolUse` | Before tool invocation |
 | `PostToolUse` | After tool completes |
-| `PostToolUseFailure` | Tool fails |
-
-### Other Events
-
-| Event | Fires When |
-|-------|------------|
-| `Notification` | Notification received |
-| `UserPromptSubmit` | User submits prompt |
-| `SubagentStart` | Subagent starts |
-| `SubagentStop` | Subagent stops |
+| `TaskCompleted` | Task finishes |
 
 ---
 
-## Hook Handler Patterns
+## OpenClaw Hook Structure
 
-### Shell Script Handler
+### Directory
 
-```bash
-#!/bin/bash
-# Read event from stdin
-EVENT=$(jq -r '.type' /dev/stdin)
-
-case "$EVENT" in
-  "session:start")
-    echo "Session started"
-    ;;
-esac
+```
+my-plugin/
+├── hooks/
+│   └── my-hook/
+│       ├── HOOK.md
+│       └── handler.ts
+└── openclaw.plugin.json
 ```
 
-### Prompt Injection Handler
+### HOOK.md
 
-```bash
-#!/bin/bash
-# Output to be injected into context
-echo "Remember: When working with databases, use the db-query skill for safe queries."
+```yaml
+---
+name: my-hook
+description: "Does something useful"
+metadata:
+  openclaw:
+    emoji: "🔧"
+    events: ["command:new", "gateway:startup"]
+    requires:
+      bins: ["my-cli"]
+---
+
+# My Hook
+
+This hook does something useful.
+```
+
+### Metadata Options
+
+| Field | Description |
+|-------|-------------|
+| `events` | Array of events: `command:new`, `command:reset`, `agent:bootstrap`, `gateway:startup` |
+| `requires.bins` | CLI tools that must exist |
+| `requires.env` | Environment variables needed |
+| `requires.config` | Config paths required |
+| `always` | Load regardless of eligibility |
+
+### Handler (handler.ts)
+
+```typescript
+const handler = async (event) => {
+  // Gateway startup
+  if (event.type === "gateway") {
+    console.log("[my-hook] Gateway started");
+    return;
+  }
+
+  // Command event
+  if (event.type === "command" && event.action === "new") {
+    // Run CLI to get context
+    const { execFileSync } = require('child_process');
+    const context = execFileSync('my-cli', ['context'], { encoding: 'utf8' });
+    event.messages.push("Plugin context loaded");
+  }
+};
+
+export default handler;
 ```
 
 ---
 
-## Best Practices
+## Plugin Manifest (openclaw.plugin.json)
 
-### What Hooks ARE For
+```json
+{
+  "id": "my-plugin",
+  "name": "My Plugin",
+  "version": "1.0.0",
+  "description": "What it does",
+  "configSchema": {
+    "type": "object",
+    "properties": {}
+  },
+  "skills": ["./skills"],
+  "hooks": [
+    {
+      "event": "gateway:startup",
+      "handler": "./hooks/my-hook"
+    }
+  ]
+}
+```
 
-- **Context reinforcement**: Remind agent to use relevant skills
-- **Automation**: Run commands based on agent actions
-- **Session management**: Setup and teardown
-- **Output processing**: Transform results
+### Required Fields
 
-### What Hooks Are NOT For
+| Field | Description |
+|-------|-------------|
+| `id` | Unique plugin ID |
+| `configSchema` | JSON Schema for config (can be empty `{}`) |
 
-- **Command policing**: Don't block or prevent actions
-- **Security validation**: That's the agent's judgment
-- **Enforcement**: Agent should remain autonomous
+### Optional Fields
 
-### Example: Context Reminder Hook
+| Field | Description |
+|-------|-------------|
+| `version` | Plugin version |
+| `name` | Display name |
+| `description` | Short summary |
+| `skills` | Skill directories to load |
+| `hooks` | Hook handlers |
+
+---
+
+## Hook Discovery (for Plugins)
+
+Hooks bundled in plugins are automatically loaded when plugin is installed.
+
+```
+Plugin directory:
+├── openclaw.plugin.json
+├── hooks/
+│   └── my-hook/
+│       ├── HOOK.md
+│       └── handler.ts
+└── skills/
+    └── my-skill/
+        └── SKILL.md
+```
+
+---
+
+## CLI Commands for Testing
 
 ```bash
-#!/bin/bash
-# hooks/session-start.sh
-# Suggests relevant skills based on context
+# Reload plugin
+openclaw plugins install -l /path/to/plugin
+openclaw gateway restart
 
-CURRENT_DIR=$(pwd)
+# List hooks
+openclaw hooks list
 
-if [[ "$CURRENT_DIR" == *"/"* ]]; then
-  echo "Tip: When searching code, use the grep-skill for efficient searching."
-fi
-
-if [[ -f "package.json" ]]; then
-  echo "Note: For npm tasks, use the npm-skill for correct command patterns."
-fi
+# Check eligibility
+openclaw hooks check
 ```
 
 ---
 
 ## Related Docs
 
-- [Hooks Patterns](../patterns/03-hooks.md)
 - [Plugin Development](../guides/02-plugin-development.md)
+- [Skill Format](../reference/02-skill-format.md)

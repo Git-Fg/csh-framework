@@ -17,23 +17,25 @@ A plugin bundles:
 
 ```
 my-plugin/
-├── SKILL.md              # Skill definition
-├── openclaw.plugin.json  # OpenClaw manifest
-├── .claude-plugin/      # Claude Code manifest
-│   └── plugin.json
-├── hooks/               # Hook handlers
-│   ├── start.sh
-│   └── before-command.sh
-└── skills/              # Additional skills (optional)
-    └── advanced/
-        └── SKILL.md
+├── openclaw.plugin.json    # OpenClaw manifest (REQUIRED)
+├── hooks/                 # Hook handlers (auto-discovered)
+│   └── my-hook/
+│       ├── HOOK.md
+│       └── handler.ts
+├── skills/              # Skills (auto-discovered)
+│   └── my-skill/
+│       └── SKILL.md
+└── src/                 # Optional: plugin code
+    └── index.ts
 ```
+
+**Note**: OpenClaw plugins don't list hooks in manifest - they're auto-discovered from `hooks/` directory.
 
 ---
 
-## Manifest Formats
+## Manifest Format (OpenClaw)
 
-### OpenClaw (`openclaw.plugin.json`)
+**Required**: Every plugin must have `openclaw.plugin.json`
 
 ```json
 {
@@ -41,17 +43,24 @@ my-plugin/
   "name": "My Plugin",
   "version": "1.0.0",
   "description": "What this plugin does",
-  "main": "./index.js",
-  "hooks": [
-    {
-      "event": "session:start",
-      "handler": "./hooks/start.sh",
-      "description": "Run on session start"
-    }
-  ],
+  "configSchema": {
+    "type": "object",
+    "properties": {}
+  },
   "skills": ["./skills"]
 }
 ```
+
+**Required fields:**
+- `id` - Unique plugin ID
+- `configSchema` - JSON Schema (can be empty `{}`)
+
+**Optional fields:**
+- `version`, `name`, `description`
+- `skills` - Skill directories to load
+- `channels`, `providers`, `uiHints`
+
+**Note**: Hooks are NOT in manifest - place them in `hooks/` directory and they'll auto-discover.
 
 ### Claude Code (`.claude-plugin/plugin.json`)
 
