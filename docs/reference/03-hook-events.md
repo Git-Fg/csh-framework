@@ -29,6 +29,14 @@ Complete reference for available hook events across platforms.
 | `cron` | Scheduled time | Periodic tasks |
 | `heartbeat` | Interval | Health checks |
 
+### Additional OpenClaw Events
+
+| Event | Fires When | Common Use |
+|-------|-------------|------------|
+| `gateway:startup` | Gateway starts | Health checks, initialization |
+| `command:new` | `/new` command | Context from previous sessions |
+| `before_compaction` | Memory flush | Checkpoint before compaction |
+
 ---
 
 ## Claude Code Hook Events
