@@ -1,3 +1,12 @@
+---
+title: "Test Cases & Templates"
+summary: "Ready-to-use behavioral test cases and templates for CSH Framework testing - skill discovery, hooks, chaining."
+read_when:
+  - You need ready-made test cases
+  - You are creating test templates
+  - You want to validate specific behaviors
+---
+
 # Test Cases & Templates Library
 
 Ready-to-use behavioral test cases for Claude Code testing.

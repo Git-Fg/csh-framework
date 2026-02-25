@@ -1,6 +1,13 @@
-# Cross-Platform Skills
+---
+title: "Cross-Platform Skills"
+summary: "How to create skills that work across both Claude Code and OpenClaw platforms."
+read_when:
+  - You want to create cross-platform plugins
+  - You are porting skills between platforms
+  - You need to understand platform-specific requirements
+---
 
-> **Hot Reload in Development**: CSH Framework (via OpenClaw) supports hot reload of skills using `openclaw -l`. See [Hot Reload Guide](../guides/hot-reload-guide.md).
+# Cross-Platform Skills
 
 ---
 

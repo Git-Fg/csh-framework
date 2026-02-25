@@ -1,3 +1,12 @@
+---
+title: "Hook Events Reference"
+summary: "Complete reference for all hook events in OpenClaw and Claude Code - session lifecycle, tool execution, and context injection."
+read_when:
+  - You need to implement specific hook events
+  - You are choosing which hooks to use
+  - You want to understand hook parameters
+---
+
 # Hook Events - Complete Reference
 
 > ⚠️ **IMPORTANT**: For **CSH Framework (CLI + Skills + Hooks)**, focus on the **command hooks** pattern:

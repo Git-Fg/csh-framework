@@ -1,3 +1,12 @@
+---
+title: "OpenClaw Testing Guide"
+summary: "Professional dev workflow for testing CSH Framework plugins in OpenClaw - Gateway, CLI, HTTP, and log-based verification."
+read_when:
+  - You are testing OpenClaw plugins
+  - You want to verify skill/hook loading
+  - You need diagnostic commands
+---
+
 # OpenClaw Testing Guide for CSH Framework
 
 > **The Professional Workflow**: Verify Gateway -> Preliminary CLI Checks -> Real-World HTTP Testing -> Behavioral Log Audit -> Iterative Refinement

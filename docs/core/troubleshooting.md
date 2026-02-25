@@ -1,3 +1,12 @@
+---
+title: "Troubleshooting Guide"
+summary: "Common issues and solutions when working with the CSH Framework."
+read_when:
+  - You are debugging a plugin or skill
+  - Something is not working as expected
+  - You need diagnostic commands
+---
+
 # Troubleshooting Guide
 
 Common issues and solutions when working with the CSH Framework.

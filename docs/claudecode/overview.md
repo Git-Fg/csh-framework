@@ -1,3 +1,12 @@
+---
+title: "Claude Code Platform Guide"
+summary: "Integration patterns for building CSH framework extensions with Claude Code - plugins, skills, hooks."
+read_when:
+  - You are integrating with Claude Code
+  - You want to understand Claude Code plugin system
+  - You need Claude Code-specific guidance
+---
+
 # Platform Guide: Claude Code
 
 > **Source**: [Claude Code Documentation](https://code.claude.com/docs/)

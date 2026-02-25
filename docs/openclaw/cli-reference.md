@@ -1,3 +1,12 @@
+---
+title: "CLI Design Patterns"
+summary: "Guidelines for building CLI tools that AI agents can use effectively as CSH Primitives - 5-10 command pattern, output formats."
+read_when:
+  - You are designing CLI commands
+  - You want agent-friendly interfaces
+  - You need output format guidelines
+---
+
 # CLI Design Patterns for CSH Primitives
 
 Guidelines and conventions for building CLI tools that AI agents can use effectively as CSH Primitives.

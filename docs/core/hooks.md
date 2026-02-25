@@ -1,3 +1,12 @@
+---
+title: "Hook Patterns"
+summary: "How to use hooks to automate functionality and provide context injection to AI agents."
+read_when:
+  - You are implementing plugin hooks
+  - You want to add context injection
+  - You need to understand the Automate + Elicit methodology
+---
+
 # Hook Patterns
 
 How to use hooks in your plugins to automate functionality and provide context.

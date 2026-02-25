@@ -1,3 +1,12 @@
+---
+title: "OpenClaw Platform Guide"
+summary: "Integration patterns, skill system, hooks, and session lifecycle when using CSH with OpenClaw."
+read_when:
+  - You are integrating with OpenClaw
+  - You want to understand OpenClaw skill loading
+  - You need to implement OpenClaw-specific features
+---
+
 # Platform Guide: OpenClaw
 
 > **Source**: [OpenClaw Documentation](https://docs.openclaw.ai/)

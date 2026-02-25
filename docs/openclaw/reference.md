@@ -1,3 +1,12 @@
+---
+title: "OpenClaw CLI Reference"
+summary: "Common OpenClaw CLI commands for CSH Framework development and testing - plugins, skills, hooks, gateway."
+read_when:
+  - You need OpenClaw CLI commands
+  - You are debugging plugin issues
+  - You want to manage skills/hooks
+---
+
 # OpenClaw CLI Reference
 
 Common OpenClaw CLI commands for CSH Framework development and testing.

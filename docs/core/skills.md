@@ -1,3 +1,12 @@
+---
+title: "Skills Implementation"
+summary: "Patterns for implementing and using skills in the CSH Framework - composition, error recovery, and SKILL.md format."
+read_when:
+  - You are creating a new skill
+  - You want to compose multiple skills together
+  - You need to write SKILL.md files
+---
+
 # Skills Implementation Patterns
 
 This document covers patterns for implementing and using skills in the CSH-Framework, covering composition, error recovery, context optimization, and SKILL.md format.

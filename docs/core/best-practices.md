@@ -1,3 +1,12 @@
+---
+title: "Best Practices"
+summary: "Comprehensive best practices for developing CSH Framework skills, tools, and testing strategies."
+read_when:
+  - You want to write effective skill descriptions
+  - You are designing new tools for agents
+  - You need testing validation guidelines
+---
+
 # Best Practices for CSH Framework Development
 
 Comprehensive best practices for developing CSH Framework skills, tools, and testing strategies.

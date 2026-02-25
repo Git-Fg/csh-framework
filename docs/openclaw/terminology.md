@@ -1,3 +1,12 @@
+---
+title: "Terminology Glossary"
+summary: "Common terms and concepts used throughout the CSH Framework documentation - CLI Primitives, Skills, Hooks, and more."
+read_when:
+  - You are new to CSH Framework
+  - You need to understand terminology
+  - You want to read consistent documentation
+---
+
 # Terminology Glossary
 
 Common terms and concepts used throughout the CSH Framework documentation.

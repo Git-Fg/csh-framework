@@ -1,3 +1,12 @@
+---
+title: "Platform Comparison"
+summary: "Comparison between Claude Code and OpenClaw - when to choose each platform for CSH Framework integration."
+read_when:
+  - You are choosing a platform
+  - You want to understand trade-offs
+  - You need to justify platform choice
+---
+
 # Platform Comparison: Claude Code vs. OpenClaw
 
 Choosing between platforms for your framework integration and understanding trade-offs for each architecture.

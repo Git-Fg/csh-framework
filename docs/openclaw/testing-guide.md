@@ -1,3 +1,12 @@
+---
+title: "Testing Framework Guide"
+summary: "Comprehensive testing framework for CSH Framework - agent behavioral validation, not code testing."
+read_when:
+  - You want to understand the testing approach
+  - You are setting up test infrastructure
+  - You need testing philosophy
+---
+
 # Behavioral Testing Framework
 
 > Testing **how agents behave** with your plugin, not whether code passes.

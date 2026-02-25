@@ -1,3 +1,12 @@
+---
+title: "Behavioral Testing Approach"
+summary: "Agent-centric validation methodology for CSH Framework - testing agent behavior, skill usage, and context injection."
+read_when:
+  - You are designing behavioral tests
+  - You want to validate agent actions
+  - You need testing methodology
+---
+
 # Behavioral Testing Approach: Agent-Centric Validation
 
 ## Testing Philosophy

@@ -1,3 +1,12 @@
+---
+title: "Claude Code Testbed"
+summary: "Using Claude Code as a behavioral testbed for CSH Framework - zero-risk iteration, real-time config, debugging."
+read_when:
+  - You want to test skills/hooks safely
+  - You need a debugging environment
+  - You are iterating on plugin behavior
+---
+
 # Using Claude Code as a Behavioral Testbed
 
 ## Why Claude Code for Testing

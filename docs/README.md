@@ -1,3 +1,12 @@
+---
+title: "CSH Framework Documentation"
+summary: "Complete documentation for the CSH (CLI + Skills + Hooks) Framework - core concepts, platform guides, testing."
+read_when:
+  - You are new to CSH Framework
+  - You want to find specific documentation
+  - You need to understand the structure
+---
+
 # CSH Framework Documentation
 
 Complete documentation for the CSH (CLI + Skills + Hooks) Framework.

@@ -1,3 +1,12 @@
+---
+title: "CLI-First Architecture"
+summary: "Build CLI tools first, then wrap with platform plugins - the canonical CSH pattern."
+read_when:
+  - You are designing a new CSH plugin
+  - You want to maximize portability
+  - You need to understand the CLI-then-plugin approach
+---
+
 # CLI-First Architecture
 
 Build CLI tools first, then wrap with platform plugins. This is the canonical CSH pattern.

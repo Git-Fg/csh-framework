@@ -1,3 +1,12 @@
+---
+title: "Three-Layer Architecture"
+summary: "The CLI + Skills + Hooks architecture: Agent → Skills → Hooks → CLI primitives."
+read_when:
+  - You want to understand the CSH architecture layers
+  - You are designing plugin integrations
+  - You need to explain CSH to others
+---
+
 # Three-Layer Architecture
 
 ## Visual Overview

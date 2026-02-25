@@ -1,3 +1,12 @@
+---
+title: "Philosophy"
+summary: "Why CLI + Skills + Hooks - the core problem CSH solves and the design principles behind it."
+read_when:
+  - You want to understand why CSH exists
+  - You are designing agent architectures
+  - You need to justify CSH to stakeholders
+---
+
 # Why CLI + Skills + Hooks?
 
 The CSH Framework (CLI-Skills-Hooks) provides a Unix-like architecture for building AI agent extensions through CLI primitives, skills for guidance, and hooks for context injection.

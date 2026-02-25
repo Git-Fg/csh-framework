@@ -1,3 +1,12 @@
+---
+title: "Testing Workflows"
+summary: "Practical testing workflows for different scenarios - skill discovery, hook injection, multi-skill chaining."
+read_when:
+  - You need to test specific scenarios
+  - You want step-by-step test procedures
+  - You are validating plugin behavior
+---
+
 # Behavioral Testing Workflows
 
 ## Practical Workflows for Different Testing Scenarios

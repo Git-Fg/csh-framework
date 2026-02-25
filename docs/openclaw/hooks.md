@@ -1,3 +1,12 @@
+---
+title: "OpenClaw Hooks"
+summary: "Event-driven automation and context injection system in OpenClaw - internal hooks and plugin hooks."
+read_when:
+  - You are implementing OpenClaw hooks
+  - You want to add context injection
+  - You need to understand hook registration
+---
+
 # OpenClaw Hooks
 
 Event-driven automation and context injection system.

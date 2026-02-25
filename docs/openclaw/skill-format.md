@@ -1,3 +1,12 @@
+---
+title: "SKILL.md Format Specification"
+summary: "Complete specification for the SKILL.md format - YAML frontmatter schema, required fields, and metadata options."
+read_when:
+  - You are creating a new skill
+  - You need to write SKILL.md files
+  - You want to understand skill metadata
+---
+
 # SKILL.md Format Specification
 
 This document provides the complete specification for the `SKILL.md` format used in the CSH Framework.

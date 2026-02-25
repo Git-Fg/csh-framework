@@ -1,3 +1,12 @@
+---
+title: "CSH Framework Overview"
+summary: "The CSH (CLI + Skills + Hooks) Framework is a portable architecture for building AI agent systems that can discover, understand, and effectively use CLI tools."
+read_when:
+  - You are new to CSH Framework
+  - You want to understand the high-level architecture
+  - You need to decide if CSH is right for your project
+---
+
 # CSH Framework - Overview
 
 The CSH (CLI + Skills + Hooks) Framework is a portable, composable architecture for building AI agent systems that can discover, understand, and effectively use CLI tools.

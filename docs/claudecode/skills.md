@@ -1,3 +1,12 @@
+---
+title: "Claude Code Skills"
+summary: "How skills work in Claude Code - discovery mechanism, skill locations, and CSH integration."
+read_when:
+  - You are creating skills for Claude Code
+  - You want to understand skill discovery
+  - You need to configure skill loading
+---
+
 # Claude Code Skills
 
 How skills work in Claude Code and the CSH Framework integration.

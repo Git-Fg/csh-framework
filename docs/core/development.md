@@ -1,8 +1,17 @@
+---
+title: "CLI Development Patterns"
+summary: "Core patterns for building CLI tools that AI agents can discover, understand, and use effectively."
+read_when:
+  - You are building a CLI tool for AI agents
+  - You want to design agent-friendly command interfaces
+  - You need to implement the 5-10-5 command pattern
+---
+
 # Development Patterns: CLI Tools for AI Agents
 
 ## Overview
 
-This guide covers the core patterns for building CLI tools that AI agents can discover, understand, and use effectively. These principles apply to any framework or CLI tool designed for agent interaction.
+This guide covers the core patterns for building agents can discover, CLI tools that AI understand, and use effectively. These principles apply to any framework or CLI tool designed for agent interaction.
 
 ---
 

@@ -1,3 +1,12 @@
+---
+title: "Claude Code CLI Reference"
+summary: "Common Claude Code CLI commands for CSH Framework development - plugin management, skills, settings."
+read_when:
+  - You need Claude Code CLI commands
+  - You are debugging plugin issues
+  - You want to manage skills/settings
+---
+
 # Claude Code CLI Reference
 
 Common Claude Code CLI commands for CSH Framework development and testing.

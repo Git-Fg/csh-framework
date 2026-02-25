@@ -1,3 +1,12 @@
+---
+title: "Cognitive Load Optimization"
+summary: "Design CLI commands and skills for AI cognitive limits - the 5-10-5 pattern."
+read_when:
+  - You are designing command interfaces
+  - You want to maximize AI accuracy
+  - You need to understand cognitive load limits
+---
+
 # Cognitive Load Optimization
 
 Design CLI commands and skills for human (and AI) cognitive limits.

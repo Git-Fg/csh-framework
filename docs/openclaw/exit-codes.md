@@ -1,3 +1,12 @@
+---
+title: "Exit Codes"
+summary: "Standard exit codes for CLI tools in CSH Framework - success, errors, validation, and resource codes."
+read_when:
+  - You are designing CLI error handling
+  - You want consistent exit codes
+  - You need to handle errors properly
+---
+
 # Exit Codes
 
 Standard exit codes for CLI tools.

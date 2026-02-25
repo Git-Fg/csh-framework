@@ -1,3 +1,12 @@
+---
+title: "Quickstart Guide"
+summary: "Get started with the CSH Framework methodology in 5 minutes."
+read_when:
+  - You want to create your first CSH plugin
+  - You need a step-by-step tutorial
+  - You are evaluating CSH for your project
+---
+
 # Quickstart Guide
 
 Get started with the CSH Framework methodology in 5 minutes.

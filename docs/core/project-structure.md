@@ -1,3 +1,12 @@
+---
+title: "Project Structure"
+summary: "How to organize CSH projects for scale and maintainability - simple vs monorepo patterns."
+read_when:
+  - You are setting up a new CSH project
+  - You need to organize a monorepo
+  - You want to understand recommended directory layouts
+---
+
 # Project Structure
 
 How to organize CSH projects for scale and maintainability.
