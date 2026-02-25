@@ -1,15 +1,15 @@
 ---
-title: "Claude Code Skills"
-summary: "How skills work in Claude Code - discovery mechanism, skill locations, and CSH integration."
+title: "Claude Code Skills in Plugins"
+summary: "How skills work in Claude Code plugins - bundled skills, discovery mechanism, and CSH integration."
 read_when:
-  - You are creating skills for Claude Code
-  - You want to understand skill discovery
-  - You need to configure skill loading
+  - You are creating skills for Claude Code plugins
+  - You want to bundle skills in your plugin
+  - You need to understand skill loading from plugins
 ---
 
-# Claude Code Skills
+# Claude Code Skills in Plugins
 
-How skills work in Claude Code and the CSH Framework integration.
+How skills work in Claude Code plugins and the CSH Framework integration.
 
 ---
 

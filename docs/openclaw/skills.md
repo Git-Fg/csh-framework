@@ -1,15 +1,15 @@
 ---
-title: "OpenClaw Skills"
-summary: "How skills are discovered, loaded, and managed in OpenClaw - including plugin-bundled skills."
+title: "OpenClaw Skills in Plugins"
+summary: "How skills are discovered, loaded, and managed in OpenClaw plugins - bundled skills, allowlists, and self-contained loading."
 read_when:
-  - You are creating skills for OpenClaw
-  - You want to understand skill discovery
+  - You are creating skills for OpenClaw plugins
+  - You want to bundle skills in your plugin
   - You need to configure skill allowlists
 ---
 
-# OpenClaw Skills
+# OpenClaw Skills in Plugins
 
-How skills are discovered, loaded, and managed in OpenClaw.
+How skills are discovered, loaded, and managed in OpenClaw plugins.
 
 ---
 

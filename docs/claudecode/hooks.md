@@ -1,15 +1,15 @@
 ---
-title: "Claude Code Hooks"
-summary: "Event-driven hooks for automation and context injection in Claude Code - 17 events, types, and configuration."
+title: "Claude Code Hooks in Plugins"
+summary: "Event-driven hooks for automation and context injection in Claude Code plugins - 17 events, types, and configuration."
 read_when:
-  - You are implementing Claude Code hooks
-  - You want to add context injection
-  - You need hook event reference
+  - You are implementing hooks in Claude Code plugins
+  - You want to add context injection via plugins
+  - You need hook event reference for plugins
 ---
 
-# Claude Code Hooks
+# Claude Code Hooks in Plugins
 
-Event-driven hooks for automation and context injection in Claude Code.
+Event-driven hooks for automation and context injection in Claude Code plugins.
 
 ---
 

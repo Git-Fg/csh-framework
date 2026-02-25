@@ -1,17 +1,17 @@
 ---
-title: "OpenClaw Platform Guide"
-summary: "Integration patterns, skill system, hooks, and session lifecycle when using CSH with OpenClaw."
+title: "OpenClaw Plugins Guide"
+summary: "Integration patterns for CSH framework plugins in OpenClaw - bundled skills, hooks, and self-contained plugins."
 read_when:
-  - You are integrating with OpenClaw
-  - You want to understand OpenClaw skill loading
-  - You need to implement OpenClaw-specific features
+  - You are creating plugins for OpenClaw
+  - You want to bundle skills and hooks in your plugin
+  - You need OpenClaw-specific guidance
 ---
 
-# Platform Guide: OpenClaw
+# Platform Guide: OpenClaw Plugins
 
 > **Source**: [OpenClaw Documentation](https://docs.openclaw.ai/)
 
-This document covers the integration patterns, skill system, hooks, and session lifecycle when using the CSH framework with OpenClaw.
+This document covers the integration patterns for building CSH framework plugins in OpenClaw.
 
 ---
 

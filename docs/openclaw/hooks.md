@@ -1,15 +1,15 @@
 ---
-title: "OpenClaw Hooks"
-summary: "Event-driven automation and context injection system in OpenClaw - internal hooks and plugin hooks."
+title: "OpenClaw Hooks in Plugins"
+summary: "Event-driven automation and context injection in OpenClaw plugins - internal hooks and plugin hooks, soft and hard hooks."
 read_when:
-  - You are implementing OpenClaw hooks
-  - You want to add context injection
+  - You are implementing hooks in OpenClaw plugins
+  - You want to add context injection via plugins
   - You need to understand hook registration
 ---
 
-# OpenClaw Hooks
+# OpenClaw Hooks in Plugins
 
-Event-driven automation and context injection system.
+Event-driven automation and context injection system in plugins.
 
 > ⚠️ **MAJOR UPDATE (2026.2.24+)**: The hook system has been FIXED! Both hook systems now work correctly. See sections below for complete documentation.
 
