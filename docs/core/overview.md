@@ -48,6 +48,36 @@ Skills don't contain tool commands—they contain guidance on when to use tools.
 ### 4. Composable Hooks
 Hooks automate background tasks AND inject guidance at key moments, ensuring agents use the right tools at the right time.
 
+### 5. Self-Contained Plugins
+Everything (skills, hooks, logic) lives in the plugin. Users install and it just works—no editing CLAUDE.md, AGENTS.md, or workspace instructions.
+
+---
+
+## Self-Contained: No Manual Config Required
+
+Unlike traditional plugins, **CSH plugins are fully self-contained**:
+
+| Traditional Plugins | CSH Plugins |
+|--------------------|--------------|
+| Requires editing CLAUDE.md | ❌ No editing needed |
+| Requires workspace hooks | ❌ Hooks bundled in plugin |
+| Requires AGENTS.md updates | ❌ Soft hooks inject context |
+| Manual skill installation | ❌ Skills auto-discovered |
+
+**How it works:**
+- **Soft hooks** inject context at session start, tool calls, etc.
+- **Hard hooks** can enforce safety rules (block execution if needed)
+- Skills are bundled and loaded when relevant
+- No user intervention required after install
+
+**Install command:**
+```bash
+openclaw plugins install ./my-plugin  # OpenClaw
+claude plugin install ./my-plugin     # Claude Code
+```
+
+That's it. Plugin self-registers skills and hooks automatically.
+
 ---
 
 ## Architecture
