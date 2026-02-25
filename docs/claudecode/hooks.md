@@ -369,10 +369,10 @@ bash -n hooks/my-hook.sh
 
 ## References
 
-- **Hook Events**: [Complete Hook Events Reference](../05-reference/02-hook-events.md)
-- **Hook Patterns**: [Hook Design Patterns](../02-core-concepts/04-hooks.md)
-- **Best Practices**: [Testing Validation Best Practices](../02-core-concepts/06-best-practices.md)
-- **Skill System**: [Claude Code Skills](./02-skills.md)
+- **Hook Events**: [Complete Hook Events Reference](../openclaw/hook-events.md)
+- **Hook Patterns**: [Hook Design Patterns](../core/hooks.md)
+- **Best Practices**: [Testing Validation Best Practices](../core/best-practices.md)
+- **Skill System**: [Claude Code Skills](./skills.md)
 
 ---
 

@@ -226,10 +226,10 @@ cat .claude/settings.json | jq '.skills'
 
 ## References
 
-- **Skill Format**: [SKILL.md Format Specification](../05-reference/01-skill-format.md)
-- **Skill Patterns**: [Skill Implementation Guide](../02-core-concepts/03-skills.md)
-- **Best Practices**: [Skill Description Best Practices](../02-core-concepts/06-best-practices.md)
-- **Hook System**: [Claude Code Hooks](./03-hooks.md)
+- **Skill Format**: [SKILL.md Format Specification](../openclaw/skill-format.md)
+- **Skill Patterns**: [Skill Implementation Guide](../core/skills.md)
+- **Best Practices**: [Skill Description Best Practices](../core/best-practices.md)
+- **Hook System**: [Claude Code Hooks](./hooks.md)
 
 ---
 

@@ -373,12 +373,12 @@ Before declaring a skill or plugin "ready":
 
 ## References
 
-- **Skill Format**: [SKILL.md Format Specification](../05-reference/01-skill-format.md)
-- **Hook Events**: [Hook Events Reference](../05-reference/02-hook-events.md)
-- **Development Patterns**: [CLI Development Patterns](./02-development.md)
-- **Skill Implementation**: [Skill Implementation Guide](./03-skills.md)
-- **Hook Patterns**: [Hook Patterns Guide](./04-hooks.md)
-- **OpenClaw Testing**: [OpenClaw Testing Guide](../03-openclaw/04-testing.md)
+- **Skill Format**: [SKILL.md Format Specification](../openclaw/skill-format.md)
+- **Hook Events**: [Hook Events Reference](../openclaw/hook-events.md)
+- **Development Patterns**: [CLI Development Patterns](./development.md)
+- **Skill Implementation**: [Skill Implementation Guide](./skills.md)
+- **Hook Patterns**: [Hook Patterns Guide](./hooks.md)
+- **OpenClaw Testing**: [OpenClaw Testing Guide](../openclaw/testing.md)
 
 ---
 

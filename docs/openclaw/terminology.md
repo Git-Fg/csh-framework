@@ -11,21 +11,21 @@ The base layer of CSH Framework consisting of executable command-line tools that
 
 **Example**: `mytool list` returns clear, readable output.
 
-**See Also**: [Development Patterns](../02-core-concepts/02-development.md)
+**See Also**: [Development Patterns](../core/development.md)
 
 ### Skills (C2)
 Agent guidance files (SKILL.md) that teach agents when and how to use CLI tools. Skills don't contain tool commands—they contain workflow guidance.
 
 **Example**: A skill might guide an agent to "use `memory-search` when the user asks about past decisions."
 
-**See Also**: [Skill Implementation](../02-core-concepts/03-skills.md)
+**See Also**: [Skill Implementation](../core/skills.md)
 
 ### Hooks (C3)
 Event-driven automation and context injection system. Hooks perform side effects (automation) and inject guidance (context) at specific events.
 
 **Example**: A `session_start` hook might load project context and remind the agent about available skills.
 
-**See Also**: [Hook Patterns](../02-core-concepts/04-hooks.md)
+**See Also**: [Hook Patterns](../core/hooks.md)
 
 ---
 
@@ -237,17 +237,17 @@ Prioritizing concise text over verbose JSON outputs for better agent understandi
 ## Cross-Reference
 
 By Topic:
-- **CLI Development**: [Development Patterns](../02-core-concepts/02-development.md)
-- **Skills**: [Skill Implementation](../02-core-concepts/03-skills.md)
-- **Hooks**: [Hook Patterns](../02-core-concepts/04-hooks.md)
-- **OpenClaw**: [OpenClaw Integration](../03-openclaw/)
-- **Claude Code**: [Claude Code Integration](../04-claude-code/)
+- **CLI Development**: [Development Patterns](../core/development.md)
+- **Skills**: [Skill Implementation](../core/skills.md)
+- **Hooks**: [Hook Patterns](../core/hooks.md)
+- **OpenClaw**: [OpenClaw Integration](./overview.md)
+- **Claude Code**: [Claude Code Integration](../claudecode/overview.md)
 
 By Platform:
-- **OpenClaw Skills**: [OpenClaw Skills](../03-openclaw/02-skills.md)
-- **OpenClaw Hooks**: [OpenClaw Hooks](../03-openclaw/03-hooks.md)
-- **Claude Code Skills**: [Claude Code Skills](../04-claude-code/02-skills.md)
-- **Claude Code Hooks**: [Claude Code Hooks](../04-claude-code/03-hooks.md)
+- **OpenClaw Skills**: [OpenClaw Skills](./skills.md)
+- **OpenClaw Hooks**: [OpenClaw Hooks](./hooks.md)
+- **Claude Code Skills**: [Claude Code Skills](../claudecode/skills.md)
+- **Claude Code Hooks**: [Claude Code Hooks](../claudecode/hooks.md)
 
 ---
 

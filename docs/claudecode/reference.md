@@ -362,10 +362,10 @@ cat .claude-plugin/plugin.json | jq .
 ## References
 
 - **Claude Code Documentation**: [code.claude.com/docs](https://code.claude.com/docs)
-- **Skill Format**: [SKILL.md Format Specification](../05-reference/01-skill-format.md)
-- **Skill System**: [Claude Code Skills](./02-skills.md)
-- **Hook System**: [Claude Code Hooks](./03-hooks.md)
-- **Core Concepts**: [CSH Core Concepts](../02-core-concepts/)
+- **Skill Format**: [SKILL.md Format Specification](../openclaw/skill-format.md)
+- **Skill System**: [Claude Code Skills](./skills.md)
+- **Hook System**: [Claude Code Hooks](./hooks.md)
+- **Core Concepts**: [CSH Core Concepts](../core/)
 
 ---
 

@@ -360,10 +360,10 @@ curl -s -X POST http://127.0.0.1:18789/v1/chat/completions \
 ## References
 
 - **OpenClaw Documentation**: [docs.openclaw.ai](https://docs.openclaw.ai/)
-- **Testing Guide**: [OpenClaw Testing Guide](./04-testing.md)
-- **Skill System**: [OpenClaw Skills](./02-skills.md)
-- **Hook System**: [OpenClaw Hooks](./03-hooks.md)
-- **Core Concepts**: [CSH Core Concepts](../02-core-concepts/)
+- **Testing Guide**: [OpenClaw Testing Guide](./testing.md)
+- **Skill System**: [OpenClaw Skills](./skills.md)
+- **Hook System**: [OpenClaw Hooks](./hooks.md)
+- **Core Concepts**: [CSH Core Concepts](../core/)
 
 ---
 

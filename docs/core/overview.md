@@ -93,10 +93,10 @@ Use CSH Framework when you need to:
 
 ## Next Steps
 
-1. **Quick Start**: Get up and running in 5 minutes → [Quickstart Guide](./02-quickstart.md)
-2. **Philosophy**: Understand the design principles → [Philosophy](./03-philosophy.md)
-3. **Core Concepts**: Deep dive into CLI, Skills, and Hooks → [Core Concepts](../02-core-concepts/)
-4. **Platform Integration**: Learn platform-specific details → [OpenClaw](../03-openclaw/) or [Claude Code](../04-claude-code/)
+1. **Quick Start**: Get up and running in 5 minutes → [Quickstart Guide](./quickstart.md)
+2. **Philosophy**: Understand the design principles → [Philosophy](./philosophy.md)
+3. **Core Concepts**: Deep dive into CLI, Skills, and Hooks → [Core Concepts](./)
+4. **Platform Integration**: Learn platform-specific details → [OpenClaw](../openclaw/) or [Claude Code](../claudecode/)
 
 ---
 
@@ -104,8 +104,8 @@ Use CSH Framework when you need to:
 
 | Concept | Description | Learn More |
 |----------|-------------|-------------|
-| **CLI Tools** | Executable commands with natural output | [Development Patterns](../02-core-concepts/02-development.md) |
-| **Skills** | Agent guidance files (SKILL.md) | [Skill Implementation](../02-core-concepts/03-skills.md) |
-| **Hooks** | Event-driven automation + context injection | [Hook Patterns](../02-core-concepts/04-hooks.md) |
-| **OpenClaw** | Multi-platform gateway with native plugins | [OpenClaw Integration](../03-openclaw/) |
-| **Claude Code** | Desktop AI coding assistant with plugins | [Claude Code Integration](../04-claude-code/) |
+| **CLI Tools** | Executable commands with natural output | [Development Patterns](./development.md) |
+| **Skills** | Agent guidance files (SKILL.md) | [Skill Implementation](./skills.md) |
+| **Hooks** | Event-driven automation + context injection | [Hook Patterns](./hooks.md) |
+| **OpenClaw** | Multi-platform gateway with native plugins | [OpenClaw Integration](../openclaw/) |
+| **Claude Code** | Desktop AI coding assistant with plugins | [Claude Code Integration](../claudecode/) |

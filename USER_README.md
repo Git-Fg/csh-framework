@@ -389,14 +389,14 @@ Because agents are inconsistent at invoking skills, use hooks at three levels:
 
 | Goal | Doc |
 |------|-----|
-| More skill patterns | `docs/patterns/02-skills.md` |
-| Hook automation | `docs/patterns/03-hooks.md` |
-| Plugin development | `docs/guides/02-plugin-development.md` |
-| Platform specifics | `docs/platforms/01-claude-code.md`, `docs/platforms/02-openclaw.md` |
-| Cross-platform skills | `docs/patterns/04-cross-platform.md` |
-| CLI design | `docs/patterns/01-development.md` |
-| Testing | `docs/guides/unified-testing-guide.md` |
+| More skill patterns | `docs/core/skills.md` |
+| Hook automation | `docs/core/hooks.md` |
+| Plugin development | `docs/openclaw/overview.md` |
+| Platform specifics | `docs/claudecode/overview.md`, `docs/openclaw/overview.md` |
+| Cross-platform skills | `docs/core/cross-platform.md` |
+| CLI design | `docs/core/development.md` |
+| Testing | `docs/openclaw/testing.md` |
 
 ---
 
-*For technical specifications (SKILL.md format, hook events, CLI reference), see the files in `docs/reference/`.*
+*For technical specifications (SKILL.md format, hook events, CLI reference), see the files in `docs/openclaw/`.*

@@ -517,10 +517,10 @@ When all else fails:
 
 ## References
 
-- **Skill Format**: [SKILL.md Format Specification](../05-reference/01-skill-format.md)
-- **Hook Events**: [Hook Events Reference](../05-reference/02-hook-events.md)
-- **Platform Comparison**: [Platform Decision Guide](../05-reference/03-platform-comparison.md)
-- **OpenClaw Testing**: [OpenClaw Testing Guide](../03-openclaw/04-testing.md)
+- **Skill Format**: [SKILL.md Format Specification](../openclaw/skill-format.md)
+- **Hook Events**: [Hook Events Reference](../openclaw/hook-events.md)
+- **Platform Comparison**: [Platform Decision Guide](../openclaw/platform-comparison.md)
+- **OpenClaw Testing**: [OpenClaw Testing Guide](../openclaw/testing.md)
 
 ---
 

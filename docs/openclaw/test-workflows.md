@@ -726,7 +726,7 @@ If overhead < 200 tokens:
 
 After behavioral validation:
 
-1. **OpenClaw Integration Test** (docs/03-openclaw-testing.md)
+1. **OpenClaw Integration Test** (./testing.md)
    - Install in OpenClaw gateway
    - Test via HTTP API
    - Validate multi-channel behavior

@@ -443,10 +443,10 @@ Code Quality      CLI Tests      OpenClaw Integration (Automated)
 
 ## References
 
-- **Claude Code Integration**: [Claude Code Overview](../04-claude-code/01-overview.md)
-- **Skill Implementation**: [Skill Implementation Guide](../02-core-concepts/03-skills.md)
-- **Hook Patterns**: [Hook Design Patterns](../02-core-concepts/04-hooks.md)
-- **Best Practices**: [Validation Best Practices](../02-core-concepts/06-best-practices.md)
+- **Claude Code Integration**: [Claude Code Overview](../claudecode/overview.md)
+- **Skill Implementation**: [Skill Implementation Guide](../core/skills.md)
+- **Hook Patterns**: [Hook Design Patterns](../core/hooks.md)
+- **Best Practices**: [Validation Best Practices](../core/best-practices.md)
 - **Case Study**: [ClawVault Behavioral Testing](../examples/clawvault-case-study.md)
 
 ---
