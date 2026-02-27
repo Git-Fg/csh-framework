@@ -30,13 +30,13 @@ description: Query PostgreSQL, MongoDB, and Redis for user information
 - `redis-cli`: Redis CLI tool installed
 
 ## Step 1: Query PostgreSQL
-csh memory get <psql-user-id> --format json
+clawvault get <psql-user-id> --format json
 
 ## Step 2: Query MongoDB
-csh memory get <mongo-user-id> --format json
+clawvault get <mongo-user-id> --format json
 
 ## Step 3: Query Redis
-csh memory get <redis-key> --format json
+clawvault get <redis-key> --format json
 
 ## Step 4: Aggregate results
 # Combine results in memory and return
@@ -78,8 +78,8 @@ If command fails:
 1. Fetch page with `curl`
 2. Parse HTML with `pup` (HTML parser)
 3. Extract data with `jq`
-4. Save to memory: `csh memory create web-data "<url>" --content "$JSON_DATA"`
-5. Log errors: `csh remember error "web-scrape:$URL: $ERROR"`
+4. Save to memory: `clawvault remember fact "web-scrape:$URL" --content "$JSON_DATA"`
+5. Log errors: `clawvault remember error "web-scrape:$URL: $ERROR"`
 
 ## Hooks Integration
 before_command: Verify URL is accessible
@@ -92,6 +92,8 @@ after_command: Check for errors and log
 - Hooks provide automation (before/after commands)
 - Agent doesn't need to handle errors directly - skill manages them
 - Retry logic is embedded in skill instructions
+
+**Real Example**: See ClawVault's `memory remember` skill at `/root/clawvault/extension-openclaw/skills/remember/`
 
 ---
 
@@ -235,9 +237,8 @@ Skills used: postgres-query, mongo-query, redis-query
 EOF
 
 # Step 2: Load sub-skills only when needed
-csh skill load postgres-query
-csh skill load mongo-query
-csh skill load redis-query
+# ClawVault uses skill directory structure, not load commands
+# See: /root/clawvault/extension-openclaw/skills/
 ```
 
 **Key Points**:
@@ -418,10 +419,16 @@ main_csh (5-10 top-level commands)
 | Command Family | Subcommands | Corresponding Skill |
 |---------------|-------------|-------------------|
 | `memory` | create, get, delete, search, list | `memory-workflow` |
-| `session` | start, end, checkpoint | `session-lifecycle` |
-| `file` | read, write, delete, search | `file-operations` |
-| `deploy` | build, test, push, rollback, status | `deployment-workflow` |
+| `session` | wake, sleep, checkpoint, recover | `session-lifecycle` |
+| `task` | create, list, done, blocked | `task-workflow` |
 | `config` | get, set, validate | `configuration-management` |
+
+**Real Example**: See ClawVault's CLI structure:
+```bash
+clawvault --help                    # 9 top-level commands
+clawvault memory --help             # Memory subcommands
+clawvault session --help            # Session subcommands
+```
 
 ---
 

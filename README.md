@@ -57,8 +57,10 @@ Complete documentation for the CSH (CLI + Skills + Hooks) Framework.
 ### Claude Code
 - [Overview](./claudecode/overview.md) — Claude Code integration overview
 - [Skills](./claudecode/skills.md) — Claude Code skill system
-- [Hooks](./claudecode/hooks.md) — Claude Code hooks (17 events, types)
-- [Reference](./claudecode/reference.md) — Claude Code CLI commands
+- [Hooks](./claudecode/hooks.md) — Claude Code hooks (14 events, types)
+- [CLI Reference](./claudecode/cli-reference.md) — Plugin commands
+- [Testing](./claudecode/testing.md) — Plugin testing guide
+- [Real Examples](./claudecode/examples.md) — ClawVault reference implementation
 
 ### Testing (OpenClaw-focused)
 - [Behavioral Testing Approach](./openclaw/behavioral-testing-approach.md) — Agent behavior validation methodology
@@ -125,6 +127,19 @@ docs/
 - **Removed**: Code-centric testing (unit tests, integration scripts, CI/CD)
 - **Added**: Behavioral testing methodology using Claude Code as testbed
 - **Rationale**: The most valuable testing is observing agent behavior, not code coverage
+
+---
+
+## Reference Implementation
+
+**ClawVault** is a production-ready example of CSH Framework in action:
+- **Location**: `/root/clawvault/`
+- **CLI**: 40+ commands (memory, session, task, project, config, etc.)
+- **Skills**: 10+ skills for memory, learning, planning
+- **Plugins**: OpenClaude Code and Claude Code extensions
+- **Pattern**: CLI-first → Skills wrapping → Hooks for injection
+
+Use ClawVault as a reference when implementing CSH patterns.
 
 ---
 

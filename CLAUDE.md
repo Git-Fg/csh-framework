@@ -46,11 +46,14 @@ csh-framework/
 │   ├── terminology.md
 │   ├── reference.md
 │   └── claude-code-testbed.md
-└── claudecode/         # Claude Code platform integration (4 files)
+└── claudecode/         # Claude Code platform integration (7 files)
     ├── overview.md
     ├── skills.md
     ├── hooks.md
-    └── reference.md
+    ├── reference.md
+    ├── cli-reference.md
+    ├── testing.md
+    └── examples.md
 ```
 
 ---

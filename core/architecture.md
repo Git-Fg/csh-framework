@@ -264,7 +264,7 @@ git log --oneline -3
 
 ## Platform-Specific Implementation
 
-See [Platform Comparison](../platforms/03-comparison.md) for how each layer works on:
+See [Platform Comparison](./openclaw/platform-comparison.md) for how each layer works on:
 - Claude Code
 - OpenClaw
 

@@ -813,49 +813,213 @@ cp "$WORKTREE_PATH/session.log" /root/logs/worktree-$(date +%s).log
 
 ---
 
-## OpenClaw Hooks
+## OpenClaw Hooks (api.on - PROVEN WORKING)
 
-OpenClaw has a hook system focused on gateway-level automation.
+> ⚠️ **REVISED (2026-02-26)**: This section documents hooks that are **PROVEN TO WORK** via `api.on()` in plugins. These are tested in production with ClawVault extension.
 
-> ⚠️ **UPDATE (2026-02)**: Some events below may work via legacy configurations or plugin API even if not officially documented. The status column reflects official documentation.
+### Hook Types: Soft vs Hard
 
-### Event Types (Currently Available)
+| Type | Capability | Use Case |
+|------|------------|----------|
+| **Soft Hook** | `prependContext`, `appendContext` | Inject instructions without blocking |
+| **Hard Hook** | `block: true`, `result: {...}` | Modify params, block execution |
 
-| Event | Fires When | Use For | Status |
-|---------|-------------|---------|--------|
-| `command` | All command events | General listener | ✅ Available |
-| `command:new` | `/new` command | Load context from previous sessions | ✅ Available |
-| `command:reset` | `/reset` command | Cleanup before reset | ✅ Available |
-| `command:stop` | `/stop` command | Graceful shutdown | ✅ Available |
-| `agent:bootstrap` | Before workspace bootstrap | Mutate bootstrap files | ✅ Available |
-| `gateway:startup` | Gateway starts | Initialize services | ✅ Available |
+---
 
-### Event Types (Future / Unverified)
+## PROVEN: Hooks That Actually Work
 
-| Event | Fires When | Expected Purpose | Status |
-|---------|-------------|------------------|--------|
-| `session_start` | New session begins | Load context | ⚠️ Unverified |
-| `session_end` | Session ends | Cleanup, checkpointing | ⚠️ Unverified |
-| `session_recover` | Session recovers | Restore state | ⚠️ Unverified |
-| `webhook` | External webhook | Remote triggers | ⚠️ Unverified |
-| `cron` | Scheduled task | Periodic automation | ⚠️ Unverified |
-| `heartbeat` | Gateway heartbeat | Health checks | ⚠️ Unverified |
-| `message:received` | Message received | Context logging | ❌ Not Available |
-| `message:sent` | Message sent | Audit trail | ❌ Not Available |
-| `agent:error` | Agent error | Error handling | ❌ Not Available |
+> **CRITICAL**: Only hooks listed in **official OpenClaw docs** (agent-loop.md) are guaranteed to work and be stable.
 
-> ⚠️ **Note**: Some events may work via legacy configurations or the Plugin API (`api.registerHook()`) even if not listed as officially available. The OpenClaw gateway may handle these differently than standalone hooks.
+### Official Hooks (from OpenClaw docs - agent-loop.md)
 
-### Hook Structure (OpenClaw)
+These hooks are documented and guaranteed to work:
 
+| Event | Soft Hook | Hard Hook | ClawVault Usage |
+|-------|-----------|----------|----------------|
+| `before_agent_start` | ✅ `prependContext` | ❌ | Inject context before run starts |
+| `agent_end` | ✅ `prependContext` | ❌ | Log session end |
+| `before_compaction` | ✅ `prependContext` | ❌ | Warn about memory limit |
+| `after_compaction` | ✅ `prependContext` | ❌ | Re-inject context after compact |
+| `before_tool_call` | ✅ `prependContext` | ⚠️ `{ block, result }` | Detect vault writes, suggest templates |
+| `after_tool_call` | ✅ `prependContext` | ❌ | Suggest ClawVault after memory_search |
+| `tool_result_persist` | ✅ `prependContext` | ❌ | Transform tool results before persist |
+| `message_received` | ✅ `prependContext` | ❌ | Detect "remember this" intent |
+| `message_sending` | ✅ `prependContext` | ❌ | (available) |
+| `message_sent` | ✅ `prependContext` | ❌ | (available) |
+| `session_start` | ✅ `prependContext` | ❌ | Inject skills menu at session start |
+| `session_end` | ✅ `prependContext` | ❌ | Auto-checkpoint before exit |
+| `gateway_start` | ✅ `prependContext` | ❌ | Gateway startup event |
+| `gateway_stop` | ✅ `prependContext` | ❌ | Gateway shutdown event |
+
+### Undocumented Hooks (Testing In Progress)
+
+> ⚠️ These hooks are NOT in official docs. ClawVault adds **meaningful logging** to verify if they actually work:
+> - Look for `✅ HOOK_NAME FIRED` in gateway logs
+> - Proof requires: log appears + prependContext is applied
+
+| Event | Test Status | Evidence Needed |
+|-------|-------------|----------------|
+| `before_prompt_build` | 🔍 Testing | Need agent run to verify |
+| `llm_output` | 🔍 Testing | Need agent run to verify |
+| `before_reset` | 🔍 Testing | Need /reset command to verify |
+| `before_message_write` | 🔍 Testing | Need message to verify |
+| `before_model_resolve` | ❓ Unknown | Not registered in ClawVault |
+| `llm_input` | ❓ Unknown | Not registered in ClawVault |
+
+---
+
+## Hard Hook Examples (from ClawVault)
+
+### before_tool_call - Block or Modify
+
+```typescript
+api.on("before_tool_call", async (event: any, ctx: any) => {
+  // Hard hook: Block dangerous writes
+  if (event.toolName === 'write') {
+    const vaultPaths = ['/root/clawvault', '/mastervault'];
+    if (vaultPaths.some(vp => event.params?.file_path?.includes(vp))) {
+      return {
+        prependContext: "\n\n[ClawVault: You're writing to vault. Use template!]",
+        block: true  // Hard hook - blocks execution
+      };
+    }
+  }
+  // Soft hook - just adds context
+  return { prependContext: "\n\n[Some instruction]" };
+});
 ```
-my-plugin/
-├── hooks/
-│   └── my-hook/
-│       ├── HOOK.md
-│       └── handler.ts
-└── openclaw.plugin.json
+
+### before_tool_call - Modify Params
+
+```typescript
+api.on("before_tool_call", async (event: any, ctx: any) => {
+  // Hard hook: Modify tool parameters
+  if (event.toolName === 'Bash' && event.params?.command?.includes('npm')) {
+    return {
+      result: { command: event.params.command + ' --legacy-peer-deps' }
+    };
+  }
+});
 ```
+
+---
+
+## Soft Hook Examples (from ClawVault)
+
+### session_start - Inject Skills Menu
+
+```typescript
+api.on("session_start", async (event: any, ctx: any) => {
+  return {
+    prependContext: `
+## 🐘 ClawVault Skills Available
+- use skill 'memory-capture' - Remember decisions
+- use skill 'memory-search' - Find past memories
+- use skill 'session-checkpoint' - Save progress
+`
+  };
+});
+```
+
+### message_received - Detect Intent
+
+```typescript
+api.on("message_received", async (event: any, ctx: any) => {
+  const msg = event.message?.content?.toLowerCase() || '';
+  const patterns = ['remember this', 'note this', 'save this'];
+
+  if (patterns.some(p => msg.includes(p))) {
+    return {
+      prependContext: `[MANDATORY] User wants to remember! Use memory-capture skill.`
+    };
+  }
+});
+```
+
+### llm_output - Detect Decisions
+
+```typescript
+api.on("llm_output", async (event: any, ctx: any) => {
+  const content = event.content?.toLowerCase() || '';
+  const decisionPatterns = ['i decided', 'we chose', 'best approach'];
+
+  if (decisionPatterns.some(p => content.includes(p))) {
+    return {
+      prependContext: `[CRITICAL] Decision detected! YOU MUST use memory-capture skill.`
+    };
+  }
+});
+```
+
+---
+
+## Legacy HOOK.md Hooks (Still Work)
+
+These use the HOOK.md format in plugin's `hooks/` directory:
+
+| Event | Type | Description |
+|-------|------|-------------|
+| `gateway:startup` | Soft | Run at gateway start |
+| `agent:bootstrap` | Soft | Before agent bootstraps |
+| `command:new` | Soft | On `/new` command |
+| `command:reset` | Soft | On `/reset` command |
+| `command:stop` | Soft | On `/stop` command |
+
+---
+
+## Quick Reference: When to Use What
+
+| Scenario | Hook | Type |
+|----------|------|------|
+| Inject skills at session start | `session_start` | Soft |
+| Detect "remember this" in user message | `message_received` | Soft |
+| Agent made a decision | `llm_output` | Soft |
+| User about to write to vault | `before_tool_call` | Hard |
+| Session ending - checkpoint | `session_end` | Soft |
+| Context was compacted | `after_compaction` | Soft |
+
+---
+
+## Implementation in Plugin
+
+```typescript
+// extension-openclaw/src/index.ts
+export default function initialize(api) {
+  // Soft hooks - inject context
+  api.on("session_start", async (event, ctx) => ({
+    prependContext: "Welcome! Use memory-capture skill..."
+  }));
+
+  api.on("message_received", async (event, ctx) => {
+    const msg = event.message?.content?.toLowerCase() || '';
+    if (msg.includes('remember')) {
+      return { prependContext: "User wants to remember! Use memory-capture skill." };
+    }
+  });
+
+  // Hard hooks - can block
+  api.on("before_tool_call", async (event, ctx) => {
+    if (event.toolName === 'write' && isVaultPath(event.params?.file_path)) {
+      return { block: true, prependContext: "Use template instead!" };
+    }
+  });
+}
+```
+
+---
+
+## What Does NOT Work (Tested)
+
+| Event | Status | Notes |
+|-------|--------|-------|
+| `agent:error` | ❌ Not available | Tried, doesn't fire |
+| `webhook` | ❌ Not available | Future feature |
+| `cron` | ❌ Not available | Future feature |
+| `heartbeat` | ❌ Not available | Separate system |
+
+---
+
+## Legacy: HOOK.md Format (Still Works)
 
 ### HOOK.md Format
 
