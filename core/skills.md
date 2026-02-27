@@ -248,7 +248,89 @@ csh skill load redis-query
 
 ---
 
-## 6. Testable Skills Pattern
+## 6. Hub-and-Spoke Pattern
+
+**Problem**: How to organize many related skills without overwhelming the agent
+
+**Solution**: Use a hub skill that routes to specific workflow files.
+
+### File Structure
+
+```
+my-plugin/skills/
+└── myhub/                    # Hub skill - single entry point
+    ├── SKILL.md              # Routing table (~30 tokens loaded)
+    └── references/           # Workflows loaded on-demand
+        ├── workflow-a.md     # Full workflow A
+        ├── workflow-b.md     # Full workflow B
+        └── workflow-c.md     # Full workflow C
+```
+
+### Hub SKILL.md Structure
+
+```markdown
+---
+name: myhub
+description: "Hub for X operations. Use when user wants to [tasks]. Routes to specific workflow files. Trigger keywords: create, delete, update."
+metadata:
+  primary-agent: "openclaw"
+---
+
+# MyHub
+
+SKILL.md is the routing entrypoint. Read the relevant workflow file based on intent.
+Do NOT inline the workflow content — read the file and follow it.
+
+## Workflow Routing
+
+| Intent | Trigger Keywords | Reference File |
+|--------|-------------------|----------------|
+| Create X | create, new, add | [references/workflow-create.md](references/workflow-create.md) |
+| Delete X | delete, remove, clear | [references/workflow-delete.md](references/workflow-delete.md) |
+| Update X | update, modify, edit | [references/workflow-update.md](references/workflow-update.md) |
+
+## How to Use
+
+1. Identify intent from trigger keywords
+2. Read the matching workflow reference file
+3. Follow the procedure in that file
+```
+
+### Reference File Structure
+
+```markdown
+# Workflow: Create
+
+## Commands
+```bash
+mycli create <type> "name"
+```
+
+## Procedure
+1. Run command
+2. Get path from output
+3. Edit result
+```
+```
+
+### Why This Works
+
+| Aspect | Result |
+|--------|--------|
+| Token at startup | ~50 tokens (hub only) |
+| Token when needed | +~100 tokens (workflow) |
+| Total for 7 workflows | ~750 tokens vs 2000+ flat |
+| Agent cognitive load | 1 skill, not 7 |
+
+**Key Points**:
+- Hub loads minimal metadata (~30 tokens)
+- Specific workflows load on-demand
+- References are ONE LEVEL DEEP (never chain references)
+- Agent reads workflow file, follows it, done
+
+---
+
+## 7. Testable Skills Pattern
 
 **Problem**: How to ensure skills work correctly without breaking the agent
 

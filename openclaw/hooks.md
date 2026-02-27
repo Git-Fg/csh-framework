@@ -502,6 +502,83 @@ export default async function handler(event: HookEvent): Promise<string> {
 }
 ```
 
+### 4. Inject --help Discovery (CRITICAL)
+
+**Always teach agents to discover capabilities via --help:**
+
+```typescript
+// In session_start or before_prompt_build hook
+const INSTRUCTIONS = `
+## 🐘 MyTool CLI
+
+First time? Discover all capabilities:
+
+\`\`\`bash
+mytool --help                      # Full CLI help
+mytool --list                      # List all commands
+mytool command --help             # Command-specific help
+\`\`\`
+
+## Quick Commands
+\`\`\`bash
+mytool search "query"             # Search
+mytool create "name"             # Create
+\`\`\`
+
+## Skills
+For detailed workflows, read **myhub** skill.
+`;
+```
+
+**Why**: Agents are lazy - they won't guess flag names. Teach them to run --help.
+
+### 5. Session State Integration
+
+**Track workflow state across turns using Map:**
+
+```typescript
+// In src/index.ts - plugin-scoped state
+const sessionState = new Map<string, {
+  activeWorkflow: string | null;
+  lastIntent: string | null;
+}>();
+
+const getState = (sessionKey: string) => {
+  if (!sessionState.has(sessionKey)) {
+    sessionState.set(sessionKey, { activeWorkflow: null, lastIntent: null });
+  }
+  return sessionState.get(sessionKey)!;
+};
+
+// In hook handlers
+if (event.type === 'message_received') {
+  const state = getState(event.sessionKey);
+  state.activeWorkflow = 'search';
+}
+
+// In session_end - cleanup
+if (event.type === 'session_end') {
+  sessionState.delete(event.sessionKey);
+}
+```
+
+### 6. Compaction Survival (CRITICAL)
+
+**Before compaction, remind agent to re-read workflow:**
+
+```typescript
+api.on('session_before_compact', async (event) => {
+  const state = getState(event.sessionKey);
+  if (state.activeWorkflow) {
+    return {
+      prependContext: `[Context compacting. Resume ${state.activeWorkflow} workflow after compact. Read references/workflow-${state.activeWorkflow}.md]`
+    };
+  }
+});
+```
+
+Without this, agent forgets its workflow mid-task after compaction.
+
 ---
 
 ## Cron Scheduling

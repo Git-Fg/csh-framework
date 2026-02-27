@@ -103,26 +103,40 @@ For CSH Framework plugins, skills are defined in the plugin manifest:
 ```json
 {
   "id": "my-csh-plugin",
-  "skills": [
-    "./skills/memory-search",
-    "./skills/memory-remember",
-    "./skills/memory-forget"
-  ]
+  "skills": ["./skills"]  # Points to directory, NOT individual paths
 }
 ```
 
-### Directory Structure
+### Recommended: Hub-and-Spoke Structure
+
+Instead of many flat skills, use a hub with references:
 
 ```
-my-plugin/
-├── openclaw.plugin.json
-└── skills/
-    ├── memory-search/
-    │   └── SKILL.md
-    ├── memory-remember/
-    │   └── SKILL.md
-    └── memory-forget/
-        └── SKILL.md
+my-plugin/skills/
+├── myhub/                    # Single hub skill (visible to agent)
+│   ├── SKILL.md              # Routing table (~50 tokens)
+│   └── references/          # Workflows (loaded on-demand)
+│       ├── workflow-search.md
+│       ├── workflow-remember.md
+│       └── workflow-browse.md
+```
+
+**Benefits:**
+- Only 1 skill visible to agent (not 10)
+- Agent loads hub at startup (~50 tokens)
+- Specific workflows load on-demand (~100 tokens each)
+- Total: ~750 tokens vs 2000+ flat skills
+
+### Legacy: Flat Structure (Avoid)
+
+```
+my-plugin/skills/
+├── memory-search/
+│   └── SKILL.md
+├── memory-remember/
+│   └── SKILL.md
+└── memory-forget/
+    ❌ AVOID - Too many skills overwhelm agents
 ```
 
 ---

@@ -132,13 +132,27 @@ Shows: Full CLI commands like "clawvault remember decision..."  # ❌
 
 ### 4. CLI --help Injection
 
-Always include at session start:
+Always include comprehensive help at session start:
+
 ```markdown
-**CLI Reference:**
+## CLI Discovery
+
+First time? Run these to discover capabilities:
+\`\`\`bash
+mytool --help                      # Full CLI help
+mytool --list                      # List all commands
+mytool search --help              # Command-specific options
+mytool create --help             # Create command options
 \`\`\`
-clawvault --help    # Full command list
+
+## Quick Commands
+\`\`\`bash
+mytool status                    # Quick check
+mytool search "query"            # Search
 \`\`\`
 ```
+
+**Key Pattern**: `--help` on main command AND subcommands. Agents won't guess flags.
 
 ---
 
@@ -237,10 +251,11 @@ api.on("message_received", async (ctx) => {
 
 1. **"use skill 'name'"** - Mandatory format for skill invocation
 2. **Mandatory language** - "YOU MUST", "YOU SHOULD" in hooks
-3. **CLI --help** - Inject at session start
-4. **Hook → Skill** - Reference, don't embed instructions
-5. **Frontmatter** - Required for all docs
-6. **Minimal frontmatter** - Only title, summary, read_when
+3. **CLI --help** - Inject comprehensive help at session start (`--help`, `--list`, `command --help`)
+4. **Hub-and-Spoke** - Use hub skill with `references/` for multiple workflows
+5. **Hook → Skill** - Reference, don't embed instructions
+6. **Frontmatter** - Required for all docs
+7. **Minimal frontmatter** - Only title, summary, read_when
 
 ---
 
