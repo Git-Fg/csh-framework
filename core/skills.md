@@ -9,11 +9,93 @@ read_when:
 
 # Skills Implementation Patterns
 
-This document covers patterns for implementing and using skills in the CSH-Framework, covering composition, error recovery, context optimization, and SKILL.md format.
+This document covers the **Hub-and-Spoke** architecture, the **Trigger-Protocol-Workflow** pattern, and mandatory skill language for the CSH-Framework.
 
 ---
 
-## 1. Skill Composition Pattern
+## 1. Hub-and-Spoke Architecture (CRITICAL)
+
+**Problem**: Loading too many instructions at once causes context exhaustion, "instruction drift", and high cognitive load where agents ignore specific rules or execute them incorrectly.
+
+**Solution**: Use a tiered approach that separates **Discovery**, **Strategy**, and **Execution**.
+
+### 1.1 The Layered Model
+
+| Layer | Component | Role | Content Focus |
+|-----------|-------|---------|---------|
+| **Discovery** | Manifest/Frontmatter | **Triggers usage** | Intent matching via "Trigger-Protocol" description. |
+| **Strategy** | Hub (SKILL.md) | **Orchestrates workflows** | Mission, Success Criteria, and high-level Spoke mapping. |
+| **Execution** | Spoke (Workflow Reference) | **How to perform** | Atomic procedures, CLI commands, and logic gates. |
+
+### 1.2 The Hub Skill (Strategy)
+- **Location**: The primary `SKILL.md` in the skill folder.
+- **Role**: High-level mission and success criteria. It maps specific user intents to "Spoke" workflows.
+- **Language**: Imperative, direct, and focused on "What" and "Why".
+
+```markdown
+# Hub Skill: Memory Management
+
+## Mission
+Provide a comprehensive persistent knowledge storage system.
+
+## Success Criteria
+- Search First: Never start a task without checking for prior decisions.
+- Deduplication: Verify existence before creating new memories.
+
+## Workflows
+- **Search**: workflow-search
+- **Remember**: workflow-remember
+```
+
+### 1.3 The Spoke Workflows (Execution)
+- **Location**: `references/workflow-*.md`
+- **Role**: Atomic, step-by-step technical instructions.
+- **Constraint**: **NEVER** include "When to use" sections in Spokes. The agent has already decided to use them by the time it reads the file. Focus exclusively on **How**.
+
+**Why this works**: Reduces baseline token usage by 70-90% while providing 100% detail exactly when needed, eliminating redundant "When to use" checks within the execution layer.
+
+---
+
+## 2. Trigger-Protocol-Workflow Pattern (MANDATORY)
+
+To ensure agents follow CSH protocols, you MUST use the **Trigger-Protocol-Workflow** pattern in skill descriptions.
+
+### 2.1 The Manifest Description
+The description in the YAML frontmatter is the **only** thing the agent sees initially. It must act as a behavioral gate.
+
+**Pattern**: `[What it does]. Use when [Triggers]. Workflows: [Spoke Names]. [Mandatory Protocol].`
+
+**Example**:
+```yaml
+description: "Manage persistent memories. Use when user asks to 'find decisions', 'remember X', or 'browse logs'. Workflows: workflow-search, workflow-remember. ALWAYS invoke this skill and read relevant workflow(s), they teach you correct way to use the CLI."
+```
+
+### 2.2 Directives over Suggestions
+- **WRONG**: "If you have time, check the logs."
+- **RIGHT**: "You MUST check logs using `clawvault search` before proceeding."
+- **CLI vs NATIVE**: Explicitly distinguish between native tools (`read_file`, `edit_file`) and CLI tools (`clawvault`, `git`). Agents MUST use the terminal/exec tool for CLI.
+
+---
+
+## 3. Strong Language & Invocation (MANDATORY)
+
+To ensure agents follow CSH protocols, you MUST use strong, unambiguous language. Avoid "consider", "suggest", or "try".
+
+### 2.1 Standard Invocation Format
+Always use the quoted format: `use skill 'skill-name'`.
+
+| Good (MANDATORY) | Bad (DEBT) |
+|------------------|------------|
+| `use skill 'research-mode'` | `use research skill` |
+| `You MUST use skill 'safety-check'` | `Please think about safety` |
+
+### 2.2 Directives over Suggestions
+- **WRONG**: "If you have time, check the logs."
+- **RIGHT**: "You MUST check logs using `cat /var/log/app.log` before proceeding."
+
+---
+
+## 3. Skill Composition Pattern
 
 **Problem**: How to build complex workflows from multiple small primitives
 

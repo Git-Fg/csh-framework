@@ -63,21 +63,67 @@ metadata: {}
 
 After the frontmatter, the skill content follows standard markdown structure.
 
-### Recommended Section Order
+### Recommended Section Order (Standard)
+
+Every OpenClaw Hub skill (`SKILL.md`) should follow this internalized structure for high-density, tiered orchestration:
+
+| Section | Importance | Purpose |
+|---------|------------|---------|
+| **Mission** | High | What is the overall goal of this skill? |
+| **Success Criteria** | High | What does success look like? |
+| **Protocol** | CRITICAL | Instructions on how to interact with this skill. |
+| **Workflows** | CRITICAL | Links to spoke files (execution details). |
+| **Quick Commands** | Medium | List of CLI commands (with terminal warning). |
+| **Memory Guide** | Medium | Guidance on what to store in long-term memory. |
+
+### Metadata Frontmatter
+
+The frontmatter MUST follow the **Trigger-Protocol-Workflow** pattern.
+
+```yaml
+---
+name: clawvault-memory
+description: "Manage persistent memories. Use when user asks to 'find decisions' or 'remember X'. Workflows: workflow-search, workflow-remember. ALWAYS invoke this skill and read relevant workflow(s), they teach you correct way to use the CLI."
+---
+```
+
+### Core Sections Template
+
+#### Mission & Success Criteria
+Define the high-level intent.
 
 ```markdown
----
-name: example-skill
-description: Brief description
----
+## Mission
+Ensure every architectural decision and significant lesson is captured in the vault. Don't let knowledge decay.
 
-# Skill Title
+## Success Criteria
+1. Every task that changes logic/infra is recorded via `clawvault remember`.
+2. Existing knowledge is searched BEFORE proposing new solutions.
+```
 
-Brief introduction paragraph.
+#### Protocol & Workflows
+This is the "gatekeeper" section.
 
-## When to Use
+```markdown
+## Protocol
+YOU MUST read the relevant workflow before performing any action. These workflows contain the exact CLI syntax and safety checks required.
 
-Use when [specific use case].
+## Workflows
+- **Search**: workflow-search (Read when: looking for past decisions, logs, or facts)
+- **Remember**: workflow-remember (Read when: task complete, decision made, or lesson learned)
+```
+
+#### Quick Commands
+Always include a warning about CLI vs Native tools.
+
+```markdown
+## Quick Commands
+> [!WARNING]
+> Use the `clawvault` CLI in bash (via `run_in_terminal`). These are CLI commands, NOT native AI tools.
+
+- `clawvault search "query"`: Search all vault categories.
+- `clawvault remember decision "key" --content "value"`: Store a new decision.
+```
 
 ## Prerequisites
 

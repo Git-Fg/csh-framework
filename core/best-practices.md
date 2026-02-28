@@ -17,23 +17,50 @@ Comprehensive best practices for developing CSH Framework skills, tools, and tes
 
 > **Guideline**: Write skill descriptions that are concise, clear, and easy for agents to understand
 
-### Core Principle
+### Core Principle: The Trigger-Protocol-Workflow Pattern
 
-**Single-Line When Possible**: Aim for one-line descriptions that can be easily recognized and parsed. Multi-line descriptions are acceptable only when necessary for clarity or examples.
+**Single-Line (MANDATORY)**: Aim for a concise, single-line description that includes the trigger and the protocol.
 
-### When to Use Single-Line
+#### Description Best Practices
 
-#### Simple Directives
-Use one line for straightforward directives or reminders:
+**Pattern**: `[What it does]. Use when [Triggers]. Workflows: [Spoke Names]. [Mandatory Protocol].`
+
+| Feature | Guideline |
+|---------|-----------|
+| **Triggers** | Use keywords like 'find', 'remember', 'browse'. |
+| **Workflows** | Cite spoke files without extensions (`workflow-search`). |
+| **Protocol** | Explicitly command the agent to read the workflow. |
+
+**Example (MANDATORY)**:
+```yaml
+---
+name: clawvault-memory
+description: "Manage persistent memories. Use when user asks to 'find decisions', 'remember X', or 'browse logs'. Workflows: workflow-search, workflow-remember. ALWAYS invoke this skill and read relevant workflow(s), they teach you correct way to use the CLI."
+```
+
+#### CLI vs. Native Tool Distinction
+
+Always clarify that specialized tools are **CLI-based** (requiring the terminal/exec tool) and NOT native functions (like `read_file` or `edit_file`).
+
+**Example**:
+```markdown
+## Quick Commands
+Use the `clawvault` CLI in bash (via `run_in_terminal`). These are CLI commands, NOT native tools.
+```
+
+### When to Use Single-Line Description
+
+#### Hub Skills
+All Hub skills MUST use a single-line description to stay within the agent's primary context without causing bloat.
 
 ```yaml
 ---
 name: security-audit
-description: "YOU MUST USE THIS SKILL BEFORE PROCEEDING with any changes to src/auth or src/middleware."
+description: "Identify vulnerabilities. Use when working on 'auth' or 'api'. Workflows: audit-jwt, audit-cors. ALWAYS read workflow(s) first."
 ```
 
-#### Simple Action Triggers
-Use one line for clear action triggers:
+#### Action Triggers
+Use one line for clear action triggers that don't follow the Hub & Spoke pattern:
 
 ```yaml
 ---
@@ -41,99 +68,36 @@ name: quick-format
 description: "Run formatter on every file edit."
 ```
 
-#### Core Functionality Summary
-Use one line for straightforward skills with single purpose:
+### When Multi-Line Description is Acceptable
 
-```yaml
----
-name: database-backup
-description: "Create daily database backups at midnight."
-```
+**Note**: Multi-line descriptions are **HIGHLY DISCOURAGED** for Hub skills and should only be used for standalone, non-orchestrating utilities.
 
-### When Multi-Line is Acceptable
-
-#### Complex Explanations
-When a skill requires nuanced explanation, multi-line is acceptable:
+#### Complex Context Injection
+When a skill requires nuanced explanation for standalone usage:
 
 ```yaml
 ---
 name: migration-guide
 description: |
-  Performs complex database migration from MySQL to PostgreSQL.
-  Handles schema changes, data transformation, and validation.
-  Use when database schema changes or migrating between versions.
-```
-
-#### Examples and Contrasts
-When showing good vs. bad patterns, multi-line examples are appropriate:
-
-```yaml
----
-name: pattern-demo
-description: |
-  Good: "Run tests before committing."
-  Bad: "Performs a security audit on codebase."
-  This example shows the difference between a simple directive and a complex description.
-```
-
-#### Structured Content Lists
-For skills that require listing multiple items:
-
-```yaml
----
-name: list-tools
-description: |
-  Lists available CLI tools:
-  - git: Version control
-  - jq: JSON processing
-  - curl: HTTP requests
+  Performs complex database migration.
+  Use when 'schema changes' or 'v1 to v2'.
+  Provides SQL generation and validation.
 ```
 
 ### Clarity Guidelines
 
-#### Be Specific
+#### Be Imperative
+Always use direct, verb-first instructions.
 
-**One-line**:
-```
-"Creates daily backups at midnight."
-```
+**Good**: "Search for memories before creating new ones."
+**Bad**: "The agent can search for memories if it wants to avoid duplicates."
 
-**Multi-line (bad)**:
-```
-"This skill performs complex database migration from MySQL to PostgreSQL.
-It handles schema changes, data transformation, and validation."
-```
+#### Use Mission & Success Criteria
+Instead of a generic "About this skill" section, use **Mission** and **Success Criteria** to define high-level behavioral goals.
 
-#### Use Active Voice
+**Mission**: "Prevent long-term context loss by ensuring every decision is captured."
+**Success Criteria**: "Every major task ends with a `memory-remember` call."
 
-**One-line**:
-```
-"Validates user inputs and blocks unauthorized access."
-```
-
-**Multi-line (bad)**:
-```
-"This skill checks various conditions including authentication,
-authorization, and access control mechanisms to ensure
-only authorized users can access sensitive data and perform
-privileged operations."
-```
-
-#### Avoid Unnecessary Detail
-Don't include implementation details in description - that belongs in the skill body:
-
-**One-line**:
-```
-"Automatically backs up database on schema changes."
-```
-
-**Multi-line (bad)**:
-```
-"This skill runs pg_dump command with --clean flag to create
-a clean backup, then creates a tarball archive using tar command,
-then uploads the archive to S3 using aws cli s3 cp command
-with metadata tracking in a separate file for audit purposes."
-```
 
 ### Decision Tree
 

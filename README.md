@@ -31,13 +31,14 @@ Complete documentation for the CSH (CLI + Skills + Hooks) Framework.
 - [Quickstart](./core/quickstart.md) — Get up and running in 5 minutes
 - [Philosophy](./core/philosophy.md) — Design principles and core problem
 - [Architecture](./core/architecture.md) — Three-layer architecture visual
+- [Skills Hub](./core/skills-hub.md) — Managing complexity with Hub-and-Spoke
 - [Development](./core/development.md) — CLI tool patterns
-- [Skills](./core/skills.md) — Skill implementation
-- [Hooks](./core/hooks.md) — Hook patterns & orchestration
+- [Skills](./core/skills.md) — **UPDATED**: Discovery, Strategy, & Execution layers
+- [Hooks](./core/hooks.md) — Hook patterns & Elicitation
 - [Cross-Platform](./core/cross-platform.md) — Multi-platform skills
-- [Best Practices](./core/best-practices.md) — Skill descriptions + testing validation
+- [Best Practices](./core/best-practices.md) — **UPDATED**: Trigger-Protocol-Workflow pattern
 - [Troubleshooting](./core/troubleshooting.md) — Common issues & solutions
-- [CLI-First Architecture](./core/cli-first-architecture.md) — Build CLI then wrap with plugins
+- [CLI-First Architecture](./core/cli-first-architecture.md) — **UPDATED**: CLI vs. Native tool distinction
 - [Cognitive Load](./core/cognitive-load-optimization.md) — 5-10-5 command pattern
 - [Project Structure](./core/project-structure.md) — Monorepo organization
 
@@ -49,7 +50,7 @@ Complete documentation for the CSH (CLI + Skills + Hooks) Framework.
 - [Reference](./openclaw/reference.md) — OpenClaw CLI commands
 - [Hook Events](./openclaw/hook-events.md) — Complete hook event reference
 - [Platform Comparison](./openclaw/platform-comparison.md) — Platform decision matrix
-- [Skill Format](./openclaw/skill-format.md) — SKILL.md specification
+- [Skill Format](./openclaw/skill-format.md) — **UPDATED**: Mission/Success/Protocol order
 - [CLI Reference](./openclaw/cli-reference.md) — CLI design principles
 - [Terminology](./openclaw/terminology.md) — Glossary of terms
 - [Exit Codes](./openclaw/exit-codes.md) — Standard exit codes

@@ -56,6 +56,13 @@ csh-framework/
     └── examples.md
 ```
 
+## Existing Reference Implementations
+
+When documenting or improving CSH, refer to these active projects for "Ground Truth":
+- **ClawVault**: `/root/clawvault/` (Core CLI + Skills + Hooks)
+- **Csh-SearXNG**: `/root/csh-dev/csh-project/csh-seraxng/`
+- **Csh-Ocdocs**: `/root/csh-dev/csh-project/csh-ocdocs/`
+
 ---
 
 ## Frontmatter Standards (REQUIRED)
@@ -90,6 +97,17 @@ read_when:
 use skill 'decision-capture-workflow'
 use skill 'workspace-audit-learn'
 ```
+
+### 2. Trigger-Protocol-Workflow Pattern
+
+Avoid vague descriptions. Always include the **Protocol** (a command to read workflows) and the **Workflows** (spoke citations).
+
+**BAD**: "Helps you manage memory."
+**GOOD**: "Manage persistent memories. Use when user asks to 'find decisions'. Workflows: workflow-search. ALWAYS invoke this skill and read relevant workflow(s)."
+
+### 3. CLI vs. Native Tool Clarity
+
+Never let the documentation or skills imply that a CLI command (like `clawvault sync`) is a native AI tool or MCP tool. Always emphasize running it in the **Terminal**.
 
 **INCORRECT** (old format to avoid):
 ```markdown

@@ -25,14 +25,20 @@ Performing silent technical tasks without requiring agent intervention:
 - Preparing environments
 
 ### 2. ELICIT (The Instruction/Elicitation)
-Providing text guidance back to the agent to trigger (elicit) the correct skill usage:
-- "⚠️ PRODUCTION MODE: Use `dry-run` first"
-- "✅ VAULT STATUS: Healthy (47 memories loaded)"
-- "ℹ️ TIP: Use `db-query` skill for this operation"
+Providing text guidance back to the agent to trigger (elicit) the correct skill usage or teach CLI patterns.
+
+**CRITICAL: Strong Natural Language Elicitation**
+Hooks MUST use strong, mandatory language to overcome agent inertia.
+
+| Strategy | Pattern | Example |
+|----------|---------|---------|
+| **Skill Redirect** | `use skill 'name'` | "⚠️ STOP. You MUST use skill 'safety-check' before editing production." |
+| **CLI Education** | `tool --help` | "ℹ️ First time using this? Run `mytool --help` to see valid flags." |
+| **Status Injection** | Data summarized | "✅ VAULT: 54/60 tasks completed. Next: 'deploy-v2'." |
 
 **Goal**: Eliminate "mode-switching penalty" by making the right choice obvious through **Capacity of Elicitation**.
 
-> **Critical Insight**: Current LLMs struggle with skill invocation (~30% rate even with perfect descriptions). Hooks work around this limitation by providing gentle guidance at key moments.
+> **Mandatory Language**: Use "You MUST", "You SHALL", "CRITICAL:", "STOP". Avoid suggestions.
 
 ---
 

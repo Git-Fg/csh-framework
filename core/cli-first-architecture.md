@@ -60,6 +60,26 @@ Top-level commands: 5 (max 10)
 
 **Rule**: Keep top-level commands ≤10, subcommands ≤5 per family
 
+## CLI vs. Native Tool Distinction
+
+**CRITICAL**: When designing skills and plugins that wrap CLI tools, you MUST explicitly distinguish between the **CLI commands** (run in terminal) and **Native AI tools** (like `read_file`, `edit_file`, `semantic_search`).
+
+Agents frequently confuse specialized CLI commands with built-in MCP or native functions.
+
+### Protocol for Skills
+1. **Warning Header**: Every `SKILL.md` using a CLI must have a warning.
+2. **Terminal Instruction**: Explicitly tell the agent to use `run_in_terminal`.
+3. **Natural Naming**: Refer to tools by their CLI name (e.g., `clawvault search`) rather than abstract "search tools".
+
+**Example**:
+```markdown
+## Quick Commands
+> [!WARNING]
+> Use the `clawvault` CLI in bash (via `run_in_terminal`). These are CLI commands, NOT native AI tools.
+
+- `clawvault search "query"`: Search the knowledge vault.
+```
+
 ## Template → Edit Hybrid
 
 Avoid shell quoting hell. Use CLI for scaffolding, agent Edit for content:
